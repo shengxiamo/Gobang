@@ -1,3 +1,6 @@
 #include "linklist.h"
 
-LinkList::LinkList() {}
+namespace data_struct {
+;
+}
+
