@@ -37,7 +37,7 @@ namespace data_struct {
     };
 
     template <typename T>
-    class SinglyLinkeList {  // 只有头指针的单向列表
+    class SinglyLinkeList {  // 只有头指针的单向链表
     public:
         SinglyLinkeList() {
             front = std::make_shared<SinglyLinkNode<T>>();
