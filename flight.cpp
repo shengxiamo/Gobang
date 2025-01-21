@@ -3,12 +3,11 @@
 // 构造函数
 Flight::Flight(const QString& flight_number, const QString& departure_city,
                const QString& arrival_city, const QString& departure_time,
-               const QString& arrival_time, double price, double discount, int total_seats)
+               const QString& arrival_time, double price, double discount, int total_seats, int booked_seats)
     : flight_number(flight_number), departure_city(departure_city),
     arrival_city(arrival_city), departure_time(departure_time),
     arrival_time(arrival_time), price(price), discount(discount),
-    total_seats(total_seats), booked_seats(0) {}
-
+    total_seats(total_seats), booked_seats(booked_seats) {}
 // Getters
 QString Flight::getFlightNumber() const {
     return flight_number;
@@ -103,3 +102,33 @@ QString Flight::toString() const {
            QString::number(total_seats) + "," +
            QString::number(booked_seats);
 }
+
+
+// 从 CSV 格式字符串构造 Flight 对象的构造函数
+Flight::Flight(const data_struct::SinglyLinkeList<QString>& csv_line) {
+    if (csv_line.size() != 9) {
+        throw std::invalid_argument("Invalid CSV format for Flight.");
+    }
+
+    flight_number = *csv_line.at(0);
+    departure_city = *csv_line.at(1);
+    arrival_city = *csv_line.at(2);
+    departure_time = *csv_line.at(3);
+    arrival_time = *csv_line.at(4);
+    price = csv_line.at(5)->toDouble();
+    discount = csv_line.at(6)->toDouble();
+    total_seats = csv_line.at(7)->toInt();
+    booked_seats = csv_line.at(8)->toInt();
+}
+
+bool Flight::bookSeat(int num) {
+    if (booked_seats + num < total_seats) {
+        return false;
+    }
+    else {
+        booked_seats += num;
+        return true;
+    }
+}
+
+

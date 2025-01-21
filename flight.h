@@ -4,6 +4,9 @@
 // Qt
 #include <QString>
 
+// Data Struct
+#include "linklist.h"
+
 class Flight {
 private:
     QString flight_number;     // 航班号
@@ -19,8 +22,9 @@ private:
 public:
     Flight(const QString& flight_number, const QString& departure_city,
            const QString& arrival_city, const QString& departure_time,
-           const QString& arrival_time, double price, double discount, int total_seats);
+           const QString& arrival_time, double price, double discount, int total_seats,int booked_seats);
 
+    explicit Flight(const data_struct::SinglyLinkeList<QString>& csv_line);
 
     // Getters
     QString getFlightNumber() const;
@@ -47,6 +51,7 @@ public:
     // Business logic
     bool isFull() const;          // 检查航班是否满仓
     double getDiscountedPrice() const; // 获取折后票价
+    bool bookSeat(int num);
 
     QString toString() const;   // 返回整条航班信息
 };

@@ -9,19 +9,24 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    backstage.cpp \
     flight.cpp \
+    flightgraph.cpp \
     linklist.cpp \
     main.cpp \
     mainwindow.cpp \
     userinterface.cpp
 
 HEADERS += \
+    backstage.h \
     flight.h \
+    flightgraph.h \
     linklist.h \
     mainwindow.h \
     userinterface.h
 
 FORMS += \
+    backstage.ui \
     mainwindow.ui \
     userinterface.ui
 
@@ -31,4 +36,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    README.md
+    README.md \
+    flights.csv
