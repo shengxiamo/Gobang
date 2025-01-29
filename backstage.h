@@ -20,6 +20,14 @@ public:
     ~BackStage();
     void loadFlightsFromCsv(const QString &filePath);
 
+private slots:
+
+    void on_saveButton_clicked();
+
+    void on_addButton_clicked();
+
+    void on_deleteButton_clicked();
+
 private:
     Ui::BackStage *ui;
 };

@@ -66,3 +66,61 @@ void BackStage::loadFlightsFromCsv(const QString &filePath) {
 }
 
 
+
+void BackStage::on_saveButton_clicked()
+{
+    QFile file("D:/Qtprojecets/Gobang/flights.csv");
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QMessageBox::warning(this, "错误", "无法打开文件");
+        return;
+    }
+
+    QTextStream out(&file);
+    int rowCount = ui->flightsInfoTable->rowCount();
+    int colCount = ui->flightsInfoTable->columnCount();
+
+    for (int i = 0; i < rowCount; ++i) {
+        QStringList rowValues;
+        for (int j = 0; j < colCount; ++j) {
+            rowValues << ui->flightsInfoTable->item(i, j)->text();
+        }
+        out << rowValues.join(",") << "\n";
+    }
+
+    file.close();
+    QMessageBox::information(this, "成功", "航班信息已保存！");
+}
+
+
+void BackStage::on_addButton_clicked() {
+        int row = ui->flightsInfoTable->rowCount();
+        ui->flightsInfoTable->insertRow(row); // 添加一行
+}
+
+
+
+void BackStage::on_deleteButton_clicked()
+{
+    // 获取选中的行
+    QList<QTableWidgetItem*> selectedItems = ui->flightsInfoTable->selectedItems();
+    if (selectedItems.isEmpty()) {
+        QMessageBox::warning(this, "提示", "请选择要删除的航班");
+        return;
+    }
+
+    // 获取所有选中行的索引（去重）
+    QSet<int> rowsToDelete;
+    for (QTableWidgetItem* item : selectedItems) {
+        rowsToDelete.insert(item->row());
+    }
+
+    // 倒序删除（防止索引错乱）
+    QList<int> sortedRows = rowsToDelete.values();
+    std::sort(sortedRows.rbegin(), sortedRows.rend());
+    for (int row : sortedRows) {
+        ui->flightsInfoTable->removeRow(row);
+    }
+
+    QMessageBox::information(this, "成功", "选中的航班已删除");
+}
+
