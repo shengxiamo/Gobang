@@ -2,8 +2,10 @@
 #define USERINTERFACE_H
 
 #include <QWidget>
-
+#include <QString>
 #include "flightgraph.h"
+#include "list.h"
+
 
 namespace Ui {
 class UserInterface;
@@ -27,6 +29,9 @@ private slots:
 private:
     Ui::UserInterface *ui;
     FlightGraph graph;
+    List<Flight> flights;
+
+    void read_csv();
 };
 
 #endif // USERINTERFACE_H

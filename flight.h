@@ -6,6 +6,7 @@
 
 // Data Struct
 #include "linklist.h"
+#include "list.h"
 
 class Flight {
 private:
@@ -25,6 +26,8 @@ public:
            const QString& arrival_time, double price, double discount, int total_seats,int booked_seats);
 
     explicit Flight(const data_struct::SinglyLinkeList<QString>& csv_line);
+
+    Flight(const List<QString>& csv_line);
 
     // Getters
     QString getFlightNumber() const;

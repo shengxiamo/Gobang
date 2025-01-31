@@ -148,6 +148,17 @@ public:
     iterator end() { return iterator(nullptr); }
     iterator begin() const { return iterator(head); }
     iterator end() const { return iterator(nullptr); }
+
+    T& at(size_t index) const {
+        if (index >= count) {
+            throw std::out_of_range("List index out of range");
+        }
+        Node* current = head;
+        for (size_t i = 0; i < index; ++i) {
+            current = current->next;
+        }
+        return current->data;
+    }
 };
 
 #endif // LIST_H

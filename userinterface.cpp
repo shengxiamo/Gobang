@@ -3,12 +3,18 @@
 
 // Qt header files
 #include <QString>
+#include <QFile>
 
 UserInterface::UserInterface(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::UserInterface)
 {
     ui->setupUi(this);
+
+    read_csv();
+    for (auto flight : flights) {
+        qDebug() << flight.toString();
+    }
 }
 
 UserInterface::~UserInterface()
@@ -40,5 +46,38 @@ void UserInterface::on_reverse_button_clicked()
     QString destination = ui->destination_input_edit->toPlainText();
     ui->origin_input_edit->setPlainText(destination);
     ui->destination_input_edit->setPlainText(origin);
+}
+
+void UserInterface::read_csv()
+{
+    QFile file("D:/Qtprojecets/Gobang/flights.csv");
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return;
+    }
+
+    QTextStream in(&file);
+
+
+    int rowCount = 0;
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        QStringList fields = line.split(',');
+
+        // 确保字段数量与 Flight 类一致
+        if (fields.size() != 9) {
+            continue;
+        }
+
+        List<QString> str_list;
+        for (auto str : fields) {
+            str_list.push_back(str);
+        }
+
+        flights.push_back(Flight(str_list));
+
+        rowCount++;
+    }
+
+    file.close();
 }
 

@@ -121,6 +121,22 @@ Flight::Flight(const data_struct::SinglyLinkeList<QString>& csv_line) {
     booked_seats = csv_line.at(8)->toInt();
 }
 
+Flight::Flight(const List<QString>& csv_line) {
+    if (csv_line.size() != 9) {
+        throw std::invalid_argument("Invalid CSV format for Flight.");
+    }
+
+    flight_number = csv_line.at(0);
+    departure_city = csv_line.at(1);
+    arrival_city = csv_line.at(2);
+    departure_time = csv_line.at(3);
+    arrival_time = csv_line.at(4);
+    price = csv_line.at(5).toDouble();
+    discount = csv_line.at(6).toDouble();
+    total_seats = csv_line.at(7).toInt();
+    booked_seats = csv_line.at(8).toInt();
+}
+
 bool Flight::bookSeat(int num) {
     if (booked_seats + num < total_seats) {
         return false;
