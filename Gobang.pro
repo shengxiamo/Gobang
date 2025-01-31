@@ -13,6 +13,7 @@ SOURCES += \
     flight.cpp \
     flightgraph.cpp \
     linklist.cpp \
+    list.cpp \
     main.cpp \
     mainwindow.cpp \
     userinterface.cpp
@@ -22,6 +23,7 @@ HEADERS += \
     flight.h \
     flightgraph.h \
     linklist.h \
+    list.h \
     mainwindow.h \
     userinterface.h
 

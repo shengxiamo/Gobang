@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "flightgraph.h"
+
 namespace Ui {
 class UserInterface;
 }
@@ -24,6 +26,7 @@ private slots:
 
 private:
     Ui::UserInterface *ui;
+    FlightGraph graph;
 };
 
 #endif // USERINTERFACE_H
